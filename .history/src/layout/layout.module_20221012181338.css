@@ -1,0 +1,103 @@
+.tool_bar {
+  background-color: #f0f4f8;
+  -webkit-app-region: drag;
+}
+.tool_bar .left_avatar {
+  margin: 5px 30px 10px;
+}
+.tool_bar .totop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tool_bar .tools {
+  -webkit-app-region: no-drag;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.tool_bar .tools .tool_icon {
+  padding: 14px 22px;
+}
+.tool_bar .tools .tool_icon_focus {
+  background-color: #68a2ea;
+}
+.tool_bar .tools1 {
+  -webkit-app-region: no-drag;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.tool_bar .tools1 .tool_icon {
+  padding: 14px 22px;
+}
+.tool_bar .tools1 .tool_icon_focus {
+  background-color: #68a2ea;
+}
+.tools_self {
+  font-style: italic;
+}
+.tool_self_title {
+  display: flex;
+  padding: 24px 16px;
+  align-items: center;
+  width: 240px;
+}
+.tool_self_title .tool_self_icon {
+  margin-right: 12px;
+}
+.tool_self_title .nick_name {
+  color: #fff;
+  font-size: 18px;
+  max-width: 160px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+}
+.tool_self_menu {
+  display: flex;
+  flex-direction: column;
+}
+.tool_self_menu .tool_self_item {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tool_self_menu .tool_self_item:hover {
+  background-color: #f0f6fd;
+}
+.tool_self_menu .tool_self_item:last-child {
+  margin-bottom: 36px;
+}
+:global .ant-popover-placement-right {
+  top: 52px !important;
+}
+:global .ant-popover-placement-right .ant-popover-title {
+  padding: 0 !important;
+  background-color: #428be5;
+}
+:global .ant-popover-placement-right .ant-popover-inner-content {
+  padding: 0;
+  padding-top: 8px;
+}
+:global .ant-dropdown-arrow {
+  border-color: #353940 !important;
+}
+:global .ant-dropdown-menu-title-content {
+  color: #fff;
+}
+:global .ant-dropdown-menu-item {
+  padding: 7px 14px !important;
+}
+:global .ant-dropdown-menu-item-active {
+  background-color: #4f545d !important;
+}
+.btn_menu {
+  background-color: #353940 !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+  overflow: hidden;
+}
