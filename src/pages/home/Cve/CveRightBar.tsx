@@ -3,8 +3,9 @@ import right_file from "@/assets/images/right_file.png";
 import right_file_se from "@/assets/images/right_file_se.png";
 import right_search from "@/assets/images/right_search.png";
 import right_search_se from "@/assets/images/right_search_se.png";
-import right_setting from "@/assets/images/right_setting.png";
-import right_setting_se from "@/assets/images/right_setting_se.png";
+import right_setting from "@/assets/images/morecv.png";
+import right_setting_se from "@/assets/images/more.png";
+
 import right_notice from "@/assets/images/right_notice.png";
 import right_notice_se from "@/assets/images/right_notice_se.png";
 import { FC, useEffect, useState } from "react";
@@ -94,10 +95,15 @@ const CveRightBar: FC<CveRightBarProps> = ({ curCve }) => {
   ];
 
   return (
-    <Sider width="42" theme="light" className="right_bar">
+    // <Sider width="42" theme="light" className="right_bar">
+    <div style={{ height: '20px' }}>
       <div className="right_bar_col">{tools.map((t) => toolIcon(t))}</div>
       {visibleDrawer && <CveRightDrawer curTool={curTool} visible={visibleDrawer} curCve={curCve} onClose={onClose} />}
-    </Sider>
+
+
+    </div>
+
+    // </Sider>
   );
 };
 

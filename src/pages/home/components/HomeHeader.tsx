@@ -1,4 +1,4 @@
-import { UserOutlined, AudioOutlined,EllipsisOutlined ,PlayCircleOutlined } from "@ant-design/icons";
+import { UserOutlined, AudioOutlined, EllipsisOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { Layout, message, Select, Tooltip } from "antd";
 import { FC, useEffect, useRef, useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
@@ -7,7 +7,7 @@ import { getOnline } from "../../../api/admin";
 import { MyAvatar } from "../../../components/MyAvatar";
 import { RootState } from "../../../store";
 import { events, im, isSingleCve } from "../../../utils";
-
+import CveRightBar from "../Cve/CveRightBar";
 import members from "@/assets/images/members.png";
 import { setMember2Status } from "../../../store/actions/contacts";
 import { useTranslation } from "react-i18next";
@@ -135,21 +135,25 @@ const HomeHeader: FC<HeaderProps> = ({ isShowBt, type, title, curCve, typing, gi
   );
 
   const ChatHeader = () => (
-    <div className="chat_header_box">
+    <div style={{
+      display: 'flex', justifyContent: "space-between",
+      alignItems: "center", marginBottom: '10px', marginTop: '10px'
+    }}>
       <div className="chat_header_box_left">
         <MyAvatar shape="square" size={42} src={curCve?.faceURL} icon={<UserOutlined />} />
         <div className="cur_status">
-          <div className="cur_status_nick">{curCve?.showName}</div>
-          <div className="cur_status_update">
+          <div className="cur_status_nick" style={{ lineHeight: '24px' }}>{curCve?.showName}</div>
+          <div className="cur_status_update" style={{ lineHeight: '24px' }}>
             {isSingleCve(curCve!) ? <SingleCveInfo /> : <GroupCveInfo />}
             {typing ? <span className="typing">{t("InInput")}</span> : null}
           </div>
         </div>
       </div>
       <div className="chat_header_box_right">
-        <Tooltip placement="right" title={t("VoiceCall")}>
+        <CveRightBar curCve={curCve!}></CveRightBar>
+        {/* <Tooltip placement="right" title={t("VoiceCall")}>
           <EllipsisOutlined onClick={voiceCall} />
-        </Tooltip>
+        </Tooltip> */}
         {/*<Tooltip placement="right" title={t("VideoCall")}>*/}
         {/*  <PlayCircleOutlined onClick={videoCall} />*/}
         {/*</Tooltip>*/}

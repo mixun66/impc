@@ -279,7 +279,7 @@ const Auth = () => {
   }, []);
 
   const applicationHandlerTemplate = (data: any, failed: string, reqFlag: boolean = false) => {
-    let dispatchFn = (list: any) => {};
+    let dispatchFn = (list: any) => { };
     let tmpArr: any[] = [];
     switch (failed) {
       case "toUserID":
@@ -458,6 +458,7 @@ const MyRoute = () => {
           <Route index element={<Home />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="profile1" element={<Profile />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>

@@ -16,12 +16,13 @@ const TopBar = () => {
   };
 
   return (
-    <div className="top_bar" style={{background:'#fff'}}>
+    <div className="top_bar" style={{ background: '#e5e4e8' }}>
       {window.electron && !window.electron.isMac && (
         <>
           <img onClick={closeApp} src={top_close} alt="" />
           <img onClick={maxSizeApp} src={top_max} alt="" />
           <img onClick={miniSizeApp} src={top_mini} alt="" />
+          <span style={{ flex: '1', textAlign: 'left', marginLeft: '20px' }}>9chat</span>
         </>
       )}
     </div>

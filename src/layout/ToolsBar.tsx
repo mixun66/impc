@@ -6,10 +6,18 @@ import cve from "@/assets/images/cve.png";
 import cve_select from "@/assets/images/cve_select.png";
 import cons from "@/assets/images/cons.png";
 import cons_select from "@/assets/images/cons_select.png";
+import me from "@/assets/images/me.png";
+import mese from "@/assets/images/mese.png";
+import msg from "@/assets/images/msg.png";
+import lxrse from "@/assets/images/lxrse.png";
+import lxr from "@/assets/images/lxr.png";
+import magse from "@/assets/images/magse.png";
+import setting from "@/assets/images/right_setting.png";
+import setting_select from "@/assets/images/right_setting_se.png";
 import { useResolvedPath, useMatch, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { FC, useEffect, useRef, useState } from "react";
-import { RightOutlined, UserOutlined,EllipsisOutlined } from "@ant-design/icons";
+import { RightOutlined, UserOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { im } from "../utils";
 import { MyAvatar } from "../components/MyAvatar";
 import UserCard from "../pages/home/components/UserCard";
@@ -28,6 +36,7 @@ type ToolItem = {
   icon_select: string,
   path: string,
   idx: number,
+  state?: string
 }
 
 const ToolIcon = ({ tool }: { tool: ToolItem }) => {
@@ -59,20 +68,18 @@ const ToolIcon = ({ tool }: { tool: ToolItem }) => {
     setApplications(fan + gan);
   }, [recvFriendApplicationList, recvGroupApplicationList]);
 
-  useEffect(()=>{
-    if(window.electron){
-      window.electron.unReadChange(unReadCount+applications)
-    }   
-   },[applications,unReadCount])
-  
+  useEffect(() => {
+    if (window.electron) {
+      window.electron.unReadChange(unReadCount + applications)
+    }
+  }, [applications, unReadCount])
+
 
   return (
-    <Link to={tool.path}>
+    <Link to={tool.path} state={{ type: tool.state }}>
       <Tooltip placement="right" title={tool.tip}>
         <div
-          className={`${styles.tool_icon} ${
-            match ? styles.tool_icon_focus : ""
-          }`}
+          className={`${styles.tool_icon}`}
         >
           <Badge
             size="small"
@@ -104,8 +111,8 @@ const ToolsBar: FC<ToolsBarProps> = ({ userInfo }) => {
   const { t } = useTranslation();
 
   useClickAway(() => {
-    if(showPop)setShowPop(false);
-  },[popRef,avaRef]);
+    if (showPop) setShowPop(false);
+  }, [popRef, avaRef]);
 
 
   const clickMenu = (idx: number) => {
@@ -115,24 +122,24 @@ const ToolsBar: FC<ToolsBarProps> = ({ userInfo }) => {
         setDraggableCardVisible(true);
         break;
       case 1:
-        navigate('/profile',{
-          state:{
-            type:'set'
+        navigate('/profile', {
+          state: {
+            type: 'set'
           }
         })
         break;
       case 2:
-        navigate('/profile',{
-          state:{
-            type:'about'
+        navigate('/profile', {
+          state: {
+            type: 'about'
           }
         })
         break;
       case 3:
         Modal.confirm({
-          title:t("LogOut"),
-          content:t("LogOutTip"),
-          onOk:logout
+          title: t("LogOut"),
+          content: t("LogOutTip"),
+          onOk: logout
         })
         break;
       default:
@@ -140,34 +147,36 @@ const ToolsBar: FC<ToolsBarProps> = ({ userInfo }) => {
     }
   };
 
-  const tools:ToolItem[] = [
+  const tools: ToolItem[] = [
     {
       tip: t("Message"),
-      icon: cve,
-      icon_select: cve_select,
+      icon: magse,
+      icon_select: msg,
       path: "/",
       idx: 0,
     },
     {
       tip: t("Contact"),
-      icon: cons,
-      icon_select: cons_select,
+      icon: lxr,
+      icon_select: lxrse,
       path: "/contacts",
       idx: 1,
     },
     {
-      tip: t("Contact"),
-      icon: cons,
-      icon_select: cons_select,
-      path: "/contacts",
+      tip: t("AboutUs"),
+      icon: me,
+      icon_select: mese,
+      path: "/profile1",
       idx: 2,
+      state: 'about'
     },
     {
-      tip: t("Contact"),
-      icon: cons,
-      icon_select: cons_select,
-      path: "/contacts",
+      tip: t("Setting"),
+      icon: setting,
+      icon_select: setting_select,
+      path: "/profile",
       idx: 3,
+      state: 'set'
     },
   ];
 
@@ -178,10 +187,10 @@ const ToolsBar: FC<ToolsBarProps> = ({ userInfo }) => {
     const IMAdminUrl = getAdminUrl();
     const LastUid = localStorage.getItem("lastimuid")
     localStorage.clear();
-    localStorage.setItem("IMAxiosUrl",IMAxiosUrl);
-    localStorage.setItem("IMUrl",IMUrl);
-    localStorage.setItem("IMAdminUrl",IMAdminUrl);
-    localStorage.setItem("lastimuid",LastUid!);
+    localStorage.setItem("IMAxiosUrl", IMAxiosUrl);
+    localStorage.setItem("IMUrl", IMUrl);
+    localStorage.setItem("IMAdminUrl", IMAdminUrl);
+    localStorage.setItem("lastimuid", LastUid!);
     navigate("/login");
   };
 
@@ -194,14 +203,14 @@ const ToolsBar: FC<ToolsBarProps> = ({ userInfo }) => {
       title: t("MyInformation"),
       idx: 0,
     },
-    {
-      title: t("AccountSettings"),
-      idx: 1,
-    },
-    {
-      title: t("AboutUs"),
-      idx: 2,
-    },
+    // {
+    //   title: t("AccountSettings"),
+    //   idx: 1,
+    // },
+    // {
+    //   title: t("AboutUs"),
+    //   idx: 2,
+    // },
     {
       title: t("LogOut"),
       idx: 3,
@@ -239,10 +248,10 @@ const ToolsBar: FC<ToolsBarProps> = ({ userInfo }) => {
       </Tooltip>
     </div>
   );
-console.log(userInfo)
+  console.log(userInfo)
   return (
     <Sider width="350" theme="light" className={styles.tool_bar}>
-        <div className={styles.tools1}>
+      <div className={styles.tools1}>
         <Popover
           trigger="click"
           placement="right"
@@ -251,7 +260,7 @@ console.log(userInfo)
           visible={showPop}
         >
           <div ref={avaRef} onClick={() => setShowPop(true)} className={styles.avatarBox} >
-           {/* 头像 */}
+            {/* 头像 */}
             <MyAvatar
               className={styles.left_avatar}
               shape="square"
@@ -260,13 +269,13 @@ console.log(userInfo)
             />
             <span>{userInfo.nickname}</span>
             <div className={styles.contre}>
-            <EllipsisOutlined />
+              <EllipsisOutlined />
             </div>
           </div>
         </Popover>
-        </div>
+      </div>
       <div className={styles.tools}>
-      
+
         {/* 导航栏 */}
         {tools.map((t, idx) => (
           <ToolIcon tool={t} key={idx} />

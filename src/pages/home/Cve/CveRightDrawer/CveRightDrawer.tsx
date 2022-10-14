@@ -92,7 +92,7 @@ const CveRightDrawer: FC<CveRightDrawerProps> = ({ curCve, visible, curTool, onC
         message.success(!curCve.isPinned ? t("PinSuc") : t("CancelPinSuc"));
         curCve.isPinned = !curCve.isPinned;
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const updateOpt = () => {
@@ -159,18 +159,18 @@ const CveRightDrawer: FC<CveRightDrawerProps> = ({ curCve, visible, curTool, onC
   return (
     <Drawer
       className="right_set_drawer"
-      width={360}
+      // width={360}
       // mask={false}
       maskClosable
       title={switchTitle()}
-      placement="right"
+      placement="left"
       onClose={() => {
         setType("set");
         onClose();
       }}
       closable={type === "set" || type === "search_message"}
       visible={visible}
-      getContainer={document.getElementById("chat_main")!}
+      getContainer={false}
     >
       {switchContent()}
     </Drawer>

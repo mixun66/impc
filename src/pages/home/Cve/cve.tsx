@@ -39,7 +39,7 @@ const WelcomeContent = () => {
     <div className="content_bg">
       <div className="content_bg_title">{t("CreateGroup")}</div>
       <div className="content_bg_sub">{t("CreateGroupTip")}</div>
-      <img src={home_bg} alt="" style={{ width :"30%"}}/>
+      <img src={home_bg} alt="" style={{ width: "30%" }} />
       <Button onClick={createGroup} className="content_bg_btn" type="primary">
         {t("CreateNow")}
       </Button>
@@ -147,8 +147,8 @@ const Home = () => {
 
   const sendForwardHandler = (options: string | MergerMsgParams, type: messageTypes, list: SelectType[]) => {
     list.map(async (s) => {
-      const uid = (s as FriendItem).userID??"";
-      const gid = (s as GroupItem).groupID??"";
+      const uid = (s as FriendItem).userID ?? "";
+      const gid = (s as GroupItem).groupID ?? "";
       let data;
       if (type === messageTypes.MERGERMESSAGE) {
         data = await im.createMergerMessage(options as MergerMsgParams);

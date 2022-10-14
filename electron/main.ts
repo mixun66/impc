@@ -14,6 +14,7 @@ async function createWindow() {
     height: 735,
     minWidth: 980,
     minHeight: 735,
+    icon:path.join(__dirname,'../public/icons/logo.png'),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,

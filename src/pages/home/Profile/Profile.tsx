@@ -9,6 +9,7 @@ import { MyAvatar } from "../../../components/MyAvatar";
 import { ANTDLOCALCHANGE } from "../../../constants/events";
 import { RootState } from "../../../store";
 import { events, im } from "../../../utils";
+import ToolsBar from "../../../layout/ToolsBar";
 
 const { Header, Sider, Content } = Layout;
 
@@ -25,7 +26,7 @@ const PersonalSetting = () => {
   const onLanguageChange = (e: RadioChangeEvent) => {
     i18n.changeLanguage(e.target.value);
     moment.locale(e.target.value);
-    events.emit(ANTDLOCALCHANGE,e.target.value)
+    events.emit(ANTDLOCALCHANGE, e.target.value)
     localStorage.setItem("IMLanguage", e.target.value);
   };
 
@@ -148,15 +149,25 @@ const Profile = () => {
       case "ps":
         return <PersonalSetting />;
       default:
-        return <div>...</div>;
+        return <div></div>;
     }
   };
+
+
+  const selectValue = (state: RootState) => state.user.selfInfo;
+  const userInfo = useSelector(selectValue, shallowEqual);
   return (
+
     <Layout className="profile">
-      <Header className="profile_header">{type === "about" ? t("AboutUs") : t("AccountSettings")}</Header>
+
+      {/* <Header className="profile_header">
+
+      </Header> */}
       <Layout>
+
         <Sider width="350" className="profile_sider" theme="light">
-          <div className="profile_sider_menu">
+          <ToolsBar userInfo={userInfo}></ToolsBar>
+          <div className="profile_sider_menu" style={{ background: 'rgb(240, 244, 248)', height: 'calc(100% - 101px)' }}>
             {(type === "about" ? aboutMenus : setMenus).map((mu) => (
               <div key={mu.idx} onClick={() => clickMenu(mu.idx)} className="profile_sider_menu_item">
                 {mu.title}

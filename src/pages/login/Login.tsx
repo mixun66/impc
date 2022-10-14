@@ -61,7 +61,7 @@ const Login = () => {
               handleError(res);
             }
             setNum((values as FormField)?.phoneNo);
-              toggle(isModify ? "modifycode" : "vericode");
+            toggle(isModify ? "modifycode" : "vericode");
           })
           .catch((err) => handleError(err));
         break;
@@ -125,7 +125,7 @@ const Login = () => {
   };
 
   const login = (data: FormField) => {
-    
+
     loginApi(data.phoneNo, md5(data.password as string))
       .then((res) => {
         imLogin(res.data.userID, res.data.token);
@@ -214,19 +214,28 @@ const Login = () => {
     <div className="login_container">
       <TopBar />
       <div className="login_wapper">
-        <div className="center_container">
-          <div className="left_container">
+        <img src={logo} style={{ width: '50px' }} />
+        <div onDoubleClick={() => setIsModalVisible(false)} className="title">
+          {t("LoginTitle")}
+        </div>
+        {/* <span className="sub_title">{t("LoginSubTitle")}</span> */}
+
+      </div>
+      <div className="login_wapper" style={{ height: '88%', backgroundImage: `linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%)` }}>
+
+        <div className="center_container" style={{ background: "#fff" }} >
+          {/* <div className="left_container">
             <div onDoubleClick={() => setIsModalVisible(false)} className="title">
               {t("LoginTitle")}
             </div>
             <span className="sub_title">{t("LoginSubTitle")}</span>
             <img src={logo} style = {{width : '80%'}}/>
-          </div>
+          </div> */}
           <LoginForm loading={loading} num={num} type={lastType.current} finish={finish} getCodeAgain={getCodeAgain} back={back} />
         </div>
         {isModalVisible && <IMConfigModal visible={isModalVisible} close={closeModal} />}
       </div>
-      <div className="login_bottom"></div>
+      {/* <div className="login_bottom"></div> */}
     </div>
   );
 };
