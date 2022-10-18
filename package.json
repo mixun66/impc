@@ -1,5 +1,5 @@
 {
-  "name": "OpenMetaOffice-Electron",
+  "name": "openmetaoffice-electron",
   "version": "1.0.0",
   "private": true,
   "dependencies": {

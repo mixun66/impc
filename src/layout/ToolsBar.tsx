@@ -11,6 +11,8 @@ import mese from "@/assets/images/mese.png";
 import msg from "@/assets/images/msg.png";
 import lxrse from "@/assets/images/lxrse.png";
 import lxr from "@/assets/images/lxr.png";
+import set from "@/assets/images/set.png";
+import setse from "@/assets/images/setse.png";
 import magse from "@/assets/images/magse.png";
 import setting from "@/assets/images/right_setting.png";
 import setting_select from "@/assets/images/right_setting_se.png";
@@ -172,8 +174,8 @@ const ToolsBar: FC<ToolsBarProps> = ({ userInfo }) => {
     },
     {
       tip: t("Setting"),
-      icon: setting,
-      icon_select: setting_select,
+      icon: set,
+      icon_select: setse,
       path: "/profile",
       idx: 3,
       state: 'set'
@@ -254,7 +256,7 @@ const ToolsBar: FC<ToolsBarProps> = ({ userInfo }) => {
       <div className={styles.tools1}>
         <Popover
           trigger="click"
-          placement="right"
+          placement="rightTop"
           content={popContent}
           title={popTitle}
           visible={showPop}

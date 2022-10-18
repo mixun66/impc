@@ -1,5 +1,5 @@
 import { shallowEqual } from "@babel/types";
-import { Button, Empty, Layout, message, Radio, RadioChangeEvent } from "antd";
+import { Button, Empty, Layout, message, Radio, RadioChangeEvent, List } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,6 +10,7 @@ import { ANTDLOCALCHANGE } from "../../../constants/events";
 import { RootState } from "../../../store";
 import { events, im } from "../../../utils";
 import ToolsBar from "../../../layout/ToolsBar";
+import logo from '@/assets/images/logo.webp'
 
 const { Header, Sider, Content } = Layout;
 
@@ -57,6 +58,47 @@ const PersonalSetting = () => {
   );
 };
 
+const NewVersion = () => {
+  const [version, setVersion] = useState('0.0.1');
+  const data = [
+    {
+      title: '获取更多',
+    },
+    {
+      title: '报告问题',
+    },
+    {
+      title: '',
+    },
+
+  ];
+  return (
+    <div style={{ width: '100%', marginTop: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+      <img src={logo} alt="logo" style={{ width: '100px', height: '100px' }} />
+      <div>9chat 版本 {version} </div>
+      <div style={{ width: '100%', marginLeft: '30px' }}>
+        <List
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                title={<a href="https://ant.design">{item.title}</a>}
+
+              />
+            </List.Item>
+          )}
+        />
+      </div>
+
+    </div>
+
+
+
+
+  )
+};
+
 const Blacklist = () => {
   const { t } = useTranslation();
   const blackList = useSelector((state: RootState) => state.contacts.blackList, shallowEqual);
@@ -88,7 +130,14 @@ const Blacklist = () => {
 const Profile = () => {
   const type = (useLocation().state as any).type ?? "about";
   const [curMenu, setCurMenu] = useState("");
+  const [seindex, setSeindex] = useState(0);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    clickMenu(0)
+    console.log("挂载完成")
+  }, [type])
+
 
   const aboutMenus = [
     {
@@ -129,11 +178,51 @@ const Profile = () => {
       case 0:
         if (type === "set") {
           setCurMenu("ps");
+          setSeindex(0)
+        }
+        if (type === "about") {
+          setCurMenu("nv");
+          setSeindex(0)
         }
         break;
       case 1:
         if (type === "set") {
           setCurMenu("bl");
+          setSeindex(1)
+        }
+        if (type === "about") {
+          setCurMenu("");
+          setSeindex(1)
+        }
+        break;
+      case 2:
+        if (type === "set") {
+          setCurMenu("bl");
+          setSeindex(2)
+        }
+        if (type === "about") {
+          setCurMenu("");
+          setSeindex(2)
+        }
+        break;
+      case 3:
+        if (type === "set") {
+          setCurMenu("bl");
+          setSeindex(3)
+        }
+        if (type === "about") {
+          setCurMenu("");
+          setSeindex(3)
+        }
+        break;
+      case 4:
+        if (type === "set") {
+          setCurMenu("bl");
+          setSeindex(4)
+        }
+        if (type === "about") {
+          setCurMenu("");
+          setSeindex(4)
         }
         break;
       default:
@@ -148,6 +237,8 @@ const Profile = () => {
         return <Blacklist />;
       case "ps":
         return <PersonalSetting />;
+      case 'nv':
+        return <NewVersion />;
       default:
         return <div></div>;
     }
@@ -169,7 +260,7 @@ const Profile = () => {
           <ToolsBar userInfo={userInfo}></ToolsBar>
           <div className="profile_sider_menu" style={{ background: 'rgb(240, 244, 248)', height: 'calc(100% - 101px)' }}>
             {(type === "about" ? aboutMenus : setMenus).map((mu) => (
-              <div key={mu.idx} onClick={() => clickMenu(mu.idx)} className="profile_sider_menu_item">
+              <div key={mu.idx} onClick={() => clickMenu(mu.idx)} className="profile_sider_menu_item" style={{ background: seindex == mu.idx ? '#9d9d9d' : '' }}>
                 {mu.title}
               </div>
             ))}
